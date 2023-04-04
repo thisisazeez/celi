@@ -40,17 +40,20 @@ if __name__ == '__main__':
     data = wks1.get_all_values()
 
     # Extract the league name from the first row
-    league_name = data[1][0]
-    country = data[0][0]
+    league_name = 'premier-league'
+    country = 'england'
 
+    print(country)
     # Construct the URL for the league's page on the website
     url = f"https://www.oddsportal.com/football/{country}/{league_name}/"
+
+    print(url)
 
     # Use requests to check if the page exists
     response = requests.get(url)
 
     if response.status_code == 404:
-        print(f"Page not found for league {league_name}")
+        print(f"Page not found for country {country} and league {league_name}")
     else:
         # If the page exists, use BeautifulSoup to scrape the page and extract the odds data
         soup = BeautifulSoup(response.content, 'html.parser')
